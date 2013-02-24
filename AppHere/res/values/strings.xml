@@ -8,5 +8,12 @@
     <string name="broadcast">Broadcast</string>
     <string name="call_the_roll">CallTheRoll</string>
     <string name="other">Other</string>
+    <string name="delete_all">DeleteAll</string>
+    <string name="delete_selected">DelSelected</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
+    <string name="add_one_by_hand">AddOneByHand</string>
+    <string name="find_contacts_from_sms">FromSMS</string>
+    <string name="add_members_from_phonebook">FromPhonebook</string>
 
 </resources>
