@@ -45,14 +45,18 @@
 	    android:layout_weight="1"
 	    android:orientation="horizontal" >
    		<EditText 
+   		    android:id="@+id/text_name"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:hint="@string/name" />
    		<EditText 
+   		    android:id="@+id/text_number"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
-		    android:hint="@string/number" />
+		    android:hint="@string/number" 
+		    android:inputType="phone" />
    		<Button
+   		    android:id="@+id/btn_addOneByHand"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/add_one_by_hand" />

@@ -40,7 +40,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(CREATE_MEMBERS_TABLE_IF_NOT_EXISTS);
        
         // for test
-        db.execSQL("INSERT INTO " + MEMBERS_TABLE + " VALUES (1, 'xiaomp', '13681749102' ); ");
+        db.execSQL("INSERT INTO " + MEMBERS_TABLE + " VALUES (1, 'xiaoma', '13681749102' ); ");
         db.execSQL("INSERT INTO " + MEMBERS_TABLE + " VALUES (2, 'peipei', '15021461916' ); ");
         
     }
@@ -58,5 +58,30 @@ public class Database extends SQLiteOpenHelper {
 				 * or SimpleCursorAdapter.swapCursor() will report an exception
 				 */
 				MEMBERS_TABLE, new String[]{BaseColumns._ID, NAME}, null, null, null, null, null);
+	}
+	
+	public void addOneMember(String name, String number){
+		// take care of empty param
+		if(name.isEmpty() || number.isEmpty()){
+			System.out.println("attempt to insert empty string to database, ignored");
+			return;
+		}
+		
+		// do nothing if exist same record already
+		// format: select * from table where name='foo' and number='123';
+		String sql = "SELECT * FROM " + MEMBERS_TABLE + " WHERE " + NAME + "='" + name + "'" + " AND "
+				+ NUMBER + "='" + number +"' ;";
+		Cursor result = this.getReadableDatabase().rawQuery(sql, null);
+		if(result.getCount() > 0)
+			return;
+			
+		// insert new record
+		// primary key column _id will increase automatically, so don't need to handle it
+		// format: insert into table (name, number) values('foo', '123');
+		sql = "INSERT INTO " + MEMBERS_TABLE + " ( " + NAME + ", " + NUMBER + " ) " + 
+				// must wrap string values(unnecessary for numbers) with "'" 
+				// attention: do not wrap whitespace by mistake, or you will insert whitespace as value;
+				" VALUES( " + "'" + name + "'" + ", '" + number + "' ); ";
+		this.getWritableDatabase().execSQL(sql);
 	}
 }
