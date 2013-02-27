@@ -15,10 +15,16 @@ public class MainActivity extends Activity {
 	private Fragment m_broadcastFragment;
 	private Fragment m_callTheRollFragment;
 	private Fragment m_otherFragment;
+	
+	private Database m_db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // init DB
+        m_db = new Database(this);
+        
         /* 
          * activity don't need a layout at all, and don't even need to call 
          * setContentView() if the tab content will fill the activity layout
@@ -28,7 +34,7 @@ public class MainActivity extends Activity {
         //setContentView(R.layout.activity_main);
         
         // new 4 fragments
-        m_membersFragment = new MembersFragment();
+        m_membersFragment = new MembersFragment(m_db);
         m_broadcastFragment = new BroadcastFragment();
         m_callTheRollFragment = new CallTheRollFragment();
         m_otherFragment = new OtherFragment();
@@ -38,6 +44,7 @@ public class MainActivity extends Activity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(false);
 
+        // add 4 tabs to actionbar
         Tab tab = actionBar.newTab()
                 .setText(R.string.members).setTabListener(new TabListener(m_membersFragment));
         actionBar.addTab(tab);
@@ -53,6 +60,7 @@ public class MainActivity extends Activity {
         tab = actionBar.newTab()
             .setText(R.string.other).setTabListener(new TabListener(m_otherFragment));
         actionBar.addTab(tab);
+        
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
