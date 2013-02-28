@@ -21,12 +21,13 @@ public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "appHereDB";
     
     private static final String MEMBERS_TABLE = "members";
+    public static final String ID = BaseColumns._ID;
     public static final String NAME = "name";
     public static final String NUMBER = "number";
     
     private static final String CREATE_MEMBERS_TABLE_IF_NOT_EXISTS =
                 "CREATE TABLE IF NOT EXISTS " + MEMBERS_TABLE + " (" +
-                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NAME + " TEXT, " +
                 NUMBER + " TEXT);";
 
@@ -57,7 +58,7 @@ public class Database extends SQLiteOpenHelper {
 				 * even though we don't bind it to ListView
 				 * or SimpleCursorAdapter.swapCursor() will report an exception
 				 */
-				MEMBERS_TABLE, new String[]{BaseColumns._ID, NAME}, null, null, null, null, null);
+				MEMBERS_TABLE, new String[]{ID, NAME}, null, null, null, null, null);
 	}
 	
 	public void addOneMember(String name, String number){
@@ -88,5 +89,17 @@ public class Database extends SQLiteOpenHelper {
 	public void deleteAllMembers(){
 		String sql = "DELETE FROM " + MEMBERS_TABLE + ";";
 		this.getWritableDatabase().execSQL(sql);
+	}
+
+	public void deleteMember(long id){
+		// format: delete from table where id='12';
+		String sql = "DELETE FROM " + MEMBERS_TABLE + " WHERE " + ID + "='" + id + "';";
+		this.getWritableDatabase().execSQL(sql);
+	}
+	
+	public void deleteMembers(long[] ids) {
+		for(long id:ids){
+			deleteMember(id);
+		}
 	}
 }

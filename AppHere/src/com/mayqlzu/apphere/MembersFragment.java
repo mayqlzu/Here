@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -15,6 +14,7 @@ public class MembersFragment extends Fragment {
 	private SimpleCursorAdapter m_adapter;
 	private Database m_db;
 	private View m_thisFragmentView; // used by inner class
+	private ListView m_listView;	// for convenience
 	
     public MembersFragment(Database db) {
 		super();
@@ -26,7 +26,10 @@ public class MembersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View thisFragmentView =  inflater.inflate(R.layout.members_fragment_layout, container, false);
+        
+        // saved for convenience
         m_thisFragmentView = thisFragmentView;
+        m_listView = (ListView)thisFragmentView.findViewById(R.id.members_listview);
         
         // register listener to button "addOneByHand"
         thisFragmentView.findViewById(R.id.btn_addOneByHand).setOnClickListener(
@@ -61,6 +64,32 @@ public class MembersFragment extends Fragment {
         		}
         	});
         
+        // register callback on button "delSelected"
+        thisFragmentView.findViewById(R.id.btn_delSelected).setOnClickListener(
+            	new View.OnClickListener() {
+            		public void onClick(View v) {
+            			// do nothing if no item checked
+            			if(0 == m_listView.getCheckedItemCount())
+            				return;
+            			
+            			// make sure id stable
+            			if(false == m_adapter.hasStableIds())
+            				System.out.println("adapter.hasStableIds() == false!");
+            			
+            			// get checked item ids
+            			long[] ids = m_listView.getCheckedItemIds();
+            			for(long id:ids){
+            				System.out.println("checked id: " + id);
+            			}
+            			
+            			// delete these records from DB by id
+            			// todo: ok to use these ids as ids in DB ? so far so good
+            			MembersFragment.this.m_db.deleteMembers(ids);
+            			
+            			// refresh UI
+            			MembersFragment.this.refreshListView();
+            		}
+            	});
         
         return thisFragmentView;
     }
