@@ -43,13 +43,14 @@ public class MembersFragment extends Fragment {
         			MembersFragment.this.m_db.addOneMember(name, number);
      
         			// refresh UI, how ?
-        			/*
+        			// yes, it works, haha :)
+        			// 0 is the loader id, must be the same with the id i used in initLoader()
+        			MembersFragment.this.getLoaderManager().getLoader(0).forceLoad();
         			MembersFragment.this.getActivity().runOnUiThread(new Runnable() {
         			    public void run() {
         			    	MembersFragment.this.m_adapter.notifyDataSetChanged();
         			    }
         			});
-        			*/
         		}
         	});
         
