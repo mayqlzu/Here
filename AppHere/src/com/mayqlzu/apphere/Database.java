@@ -84,4 +84,9 @@ public class Database extends SQLiteOpenHelper {
 				" VALUES( " + "'" + name + "'" + ", '" + number + "' ); ";
 		this.getWritableDatabase().execSQL(sql);
 	}
+	
+	public void deleteAllMembers(){
+		String sql = "DELETE FROM " + MEMBERS_TABLE + ";";
+		this.getWritableDatabase().execSQL(sql);
+	}
 }

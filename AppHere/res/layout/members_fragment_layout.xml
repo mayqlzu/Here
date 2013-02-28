@@ -18,10 +18,12 @@
 		    android:gravity="center"
         	android:text="@string/place_holder" />
    		<Button
+		    android:id="@+id/btn_deleteAll"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/delete_all" />
    		<Button
+		    android:id="@+id/btn_delSelected"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/delete_selected" />

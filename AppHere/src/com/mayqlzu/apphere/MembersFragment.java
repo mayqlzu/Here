@@ -42,20 +42,38 @@ public class MembersFragment extends Fragment {
         			 */
         			MembersFragment.this.m_db.addOneMember(name, number);
      
-        			// refresh UI, how ?
-        			// yes, it works, haha :)
-        			// 0 is the loader id, must be the same with the id i used in initLoader()
-        			MembersFragment.this.getLoaderManager().getLoader(0).forceLoad();
-        			MembersFragment.this.getActivity().runOnUiThread(new Runnable() {
-        			    public void run() {
-        			    	MembersFragment.this.m_adapter.notifyDataSetChanged();
-        			    }
-        			});
+        			// refresh UI
+        			MembersFragment.this.refreshListView();
+        		}
+        	});
+        
+        // register listener to button "deleteAll"
+        thisFragmentView.findViewById(R.id.btn_deleteAll).setOnClickListener(
+        	new View.OnClickListener() {
+        		public void onClick(View v) {
+        			// delete all record from DB;
+        			MembersFragment.this.m_db.deleteAllMembers();
+        			
+        			// refresh UI
+        			MembersFragment.this.refreshListView();
         		}
         	});
         
         return thisFragmentView;
     }
+	
+	
+	private void refreshListView(){
+        // refresh UI, how ?
+        // yes, it works, haha :)
+        // 0 is the loader id, must be the same with the id i used in initLoader()
+        getLoaderManager().getLoader(0).forceLoad();
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+            	m_adapter.notifyDataSetChanged();
+            }
+        });
+	}
     
     public void onActivityCreated (Bundle savedInstanceState){
     	super.onActivityCreated(savedInstanceState);
