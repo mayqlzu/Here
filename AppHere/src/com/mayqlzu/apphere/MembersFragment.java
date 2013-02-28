@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -59,6 +61,7 @@ public class MembersFragment extends Fragment {
         		}
         	});
         
+        
         return thisFragmentView;
     }
 	
@@ -84,6 +87,12 @@ public class MembersFragment extends Fragment {
                 new String[] { Database.NAME },
                 new int[] { android.R.id.text1 }, 0); //you can use android.R.id.text2 if want to show more
         listView.setAdapter(m_adapter);
+        /*
+         *  add this line and user can set checkmark now, 
+         *  it's supported by system by default,
+         *  do NOT need to set checkmark in event handler manually. 
+         */
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         
     	getLoaderManager().initLoader(0, // loader id
     			null, // Optional arguments to supply to the loader at construction
