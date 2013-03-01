@@ -15,16 +15,20 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int btn_addOneByHand=0x7f070006;
-        public static final int btn_delSelected=0x7f070002;
-        public static final int btn_deleteAll=0x7f070001;
-        public static final int btn_fromPhonebook=0x7f070008;
-        public static final int btn_fromSMS=0x7f070007;
-        public static final int members_listview=0x7f070003;
-        public static final int menu_settings=0x7f070009;
-        public static final int textView1=0x7f070000;
-        public static final int text_name=0x7f070004;
-        public static final int text_number=0x7f070005;
+        public static final int btn_addOneByHand=0x7f07000a;
+        public static final int btn_cancel=0x7f070003;
+        public static final int btn_delSelected=0x7f070006;
+        public static final int btn_deleteAll=0x7f070005;
+        public static final int btn_fromPhonebook=0x7f07000c;
+        public static final int btn_fromSMS=0x7f07000b;
+        public static final int btn_start=0x7f070004;
+        public static final int hint=0x7f070000;
+        public static final int members_listview=0x7f070007;
+        public static final int menu_settings=0x7f07000d;
+        public static final int range=0x7f070001;
+        public static final int seekBar=0x7f070002;
+        public static final int text_name=0x7f070008;
+        public static final int text_number=0x7f070009;
     }
     public static final class layout {
         public static final int activity_main_not_used=0x7f030000;
@@ -43,16 +47,20 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int broadcast=0x7f040005;
         public static final int call_the_roll=0x7f040006;
+        public static final int cancel=0x7f040014;
         public static final int delete_all=0x7f040008;
         public static final int delete_selected=0x7f040009;
         public static final int find_contacts_from_sms=0x7f04000d;
         public static final int hello_world=0x7f040001;
+        public static final int hint=0x7f040011;
         public static final int members=0x7f040004;
         public static final int menu_settings=0x7f040002;
         public static final int name=0x7f04000a;
         public static final int number=0x7f04000b;
         public static final int other=0x7f040007;
         public static final int place_holder=0x7f04000f;
+        public static final int range=0x7f040012;
+        public static final int start=0x7f040013;
         public static final int title_activity_collectContactsFromSMS=0x7f040010;
         public static final int title_activity_main=0x7f040003;
     }

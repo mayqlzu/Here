@@ -17,4 +17,8 @@
     <string name="add_members_from_phonebook">FromPhonebook</string>
     <string name="place_holder">PlaceHolder</string>
     <string name="title_activity_collectContactsFromSMS">collectContactsFromSMS</string>
+    <string name="hint">let your friends send you SMS which contains their names alone, and start searching</string>
+    <string name="range">range msg place holder</string>
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
 </resources>
