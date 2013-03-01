@@ -99,8 +99,8 @@ public class MembersFragment extends Fragment {
             	new View.OnClickListener() {
             		public void onClick(View v) {
             			Intent intent = new Intent(m_activity, CollectContactsFromSMSActivity.class);
-            			int requestCode = 1;
-            			m_activity.startActivityForResult(intent, requestCode);
+            			m_activity.startActivityForResult(intent, 
+            					RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal());
             		}
             	});
         

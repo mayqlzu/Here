@@ -22,11 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name=".CollectContactsFromSMSActivity"
             android:label="@string/title_activity_collectContactsFromSMS" >
         </activity>
         
+        <activity
+            android:name=".FilterCandidatesActivity"
+            android:label="@string/title_activity_filter_candidates" >
+        </activity>
         
     </application>
     

@@ -16,9 +16,16 @@
     <string name="find_contacts_from_sms">FromSMS</string>
     <string name="add_members_from_phonebook">FromPhonebook</string>
     <string name="place_holder">PlaceHolder</string>
+    
     <string name="title_activity_collectContactsFromSMS">collectContactsFromSMS</string>
     <string name="hint">let your friends send you SMS which contains their names alone, and start searching</string>
     <string name="range">range msg place holder</string>
     <string name="start">Start</string>
     <string name="cancel">Cancel</string>
+    
+    <string name="title_activity_filter_candidates">filter candidates</string>
+    <string name="candidates_hint">Candidates:</string>
+    <string name="save_into_phonebook">SaveIntoPhoneBookByTheWay</string>
+    <string name="choose_all">ChooseAll</string>
+    <string name="choose_marked_only">MarkedOnly</string>
 </resources>

@@ -3,6 +3,7 @@ package com.mayqlzu.apphere;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,13 +38,19 @@ public class CollectContactsFromSMSActivity extends Activity{
 				       
 				       System.out.println("body:" + body + " address:" + address + " date_sent:" + date_sent);
 				       
-				       // how can i filter the bodies that are name ?
+				       // how can i filter the candidates?
 				       // for now, just filter the ones that has short length and not contain ?, leave user to filter again
 				       if(body.length() < 10 && !body.contains("?")){
 				    	  msgs.add(new SMS(address, body, date_sent));
 				       }
-				       System.out.println(msgs.size() + " valid msgs found");
+				       System.out.println(msgs.size() + " candidates found");
 				}while(cursor.moveToNext());
+				
+				// start next Activity: FilterCandidatesActivity
+				Activity hostActivity = CollectContactsFromSMSActivity.this;
+				Intent intent = new Intent(hostActivity, FilterCandidatesActivity.class);
+				hostActivity.startActivityForResult(intent, 
+						RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
 			}
 		});
     }
