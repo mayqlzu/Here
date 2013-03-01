@@ -1,11 +1,12 @@
 package com.mayqlzu.apphere;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -15,6 +16,7 @@ public class MembersFragment extends Fragment {
 	private Database m_db;
 	private View m_thisFragmentView; // used by inner class
 	private ListView m_listView;	// for convenience
+    private Activity m_activity;
 	
     public MembersFragment(Database db) {
 		super();
@@ -91,6 +93,17 @@ public class MembersFragment extends Fragment {
             		}
             	});
         
+        
+        // register callback on button "fromSMS"
+        thisFragmentView.findViewById(R.id.btn_fromSMS).setOnClickListener(
+            	new View.OnClickListener() {
+            		public void onClick(View v) {
+            			Intent intent = new Intent(m_activity, CollectContactsFromSMSActivity.class);
+            			int requestCode = 1;
+            			m_activity.startActivityForResult(intent, requestCode);
+            		}
+            	});
+        
         return thisFragmentView;
     }
 	
@@ -109,6 +122,7 @@ public class MembersFragment extends Fragment {
     
     public void onActivityCreated (Bundle savedInstanceState){
     	super.onActivityCreated(savedInstanceState);
+    	m_activity = this.getActivity();
     	
         ListView listView = (ListView)this.getActivity().findViewById(R.id.members_listview);
         m_adapter = new SimpleCursorAdapter(getActivity(),

@@ -16,5 +16,5 @@
     <string name="find_contacts_from_sms">FromSMS</string>
     <string name="add_members_from_phonebook">FromPhonebook</string>
     <string name="place_holder">PlaceHolder</string>
-
+    <string name="title_activity_collectContactsFromSMS">collectContactsFromSMS</string>
 </resources>

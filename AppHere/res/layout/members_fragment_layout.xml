@@ -69,10 +69,12 @@
 	    android:layout_height="wrap_content"
 	    android:layout_weight="1" >
    		<Button
+   		    android:id="@+id/btn_fromSMS"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/find_contacts_from_sms" />
    		<Button
+   		    android:id="@+id/btn_fromPhonebook"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentRight="true"
