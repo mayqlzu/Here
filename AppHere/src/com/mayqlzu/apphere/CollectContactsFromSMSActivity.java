@@ -27,7 +27,6 @@ public class CollectContactsFromSMSActivity extends Activity{
 				Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), 
 						null, null, null, null);
 				cursor.moveToFirst();
-				/* for debug
 				if(0 == cursor.getCount())
 					return;
 				ArrayList<SMS> msgs = new ArrayList<SMS>();
@@ -46,10 +45,25 @@ public class CollectContactsFromSMSActivity extends Activity{
 				       }
 				       System.out.println(msgs.size() + " candidates found");
 				}while(cursor.moveToNext());
-				*/
+				
+				// arrange data into 3 arrays
+				int count = msgs.size();
+				String[] address 	= new String[count];
+				String[] body 	= new String[count];
+				String[] date_sent 	= new String[count];
+				for(int i=0; i<count; i++){
+					SMS msg = msgs.get(i);
+					address[i] = msg.m_address;
+					body[i] = msg.m_body;
+					date_sent[i] = msg.m_date_sent;
+				}
+				
 				// start next Activity: FilterCandidatesActivity
 				Activity hostActivity = CollectContactsFromSMSActivity.this;
 				Intent intent = new Intent(hostActivity, FilterCandidatesActivity.class);
+				intent.putExtra(CONST_STRING.address, address);
+				intent.putExtra(CONST_STRING.body, body);
+				intent.putExtra(CONST_STRING.date_sent, date_sent);
 				hostActivity.startActivityForResult(intent, 
 						RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
 			}
