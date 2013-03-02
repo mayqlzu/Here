@@ -1,6 +1,7 @@
 package com.mayqlzu.apphere;
 
 public enum RequestCodes {
+	PLACE_HOLDER,
 	MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS,
 	COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES
 }

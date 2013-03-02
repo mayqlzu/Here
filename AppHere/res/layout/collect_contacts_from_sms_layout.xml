@@ -29,8 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:layout_below="@id/seekBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentLeft="true" />
 
     <Button
         android:id="@+id/btn_start"
@@ -39,7 +38,6 @@
         android:text="@string/start"
         android:layout_below="@id/seekBar"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/btn_cancel"/>
     
 </RelativeLayout>
