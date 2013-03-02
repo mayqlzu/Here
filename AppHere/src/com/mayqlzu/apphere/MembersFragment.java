@@ -162,11 +162,24 @@ public class MembersFragment extends Fragment {
     		String[] names = data.getStringArrayExtra(CONST_STRING.names);
     		String[] numbers = data.getStringArrayExtra(CONST_STRING.numbers);
     		
+    		/* check
     		for(String name:names)
     			System.out.println(name);
     		
     		for(String number:numbers)
     			System.out.println(number);
+    		*/
+    		
+    		if(names.length != numbers.length)
+    			System.out.println("names.length != numbers.length, something must be wrong!");
+    			
+    		for(int i=0; i<names.length; i++){
+    			// caller will take care of collision
+    			this.m_db.addOneMember(names[i], numbers[i]);
+    		}
+     
+        	// refresh UI
+        	this.refreshListView();
     	}
     }
 }
