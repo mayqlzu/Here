@@ -99,7 +99,15 @@ public class MembersFragment extends Fragment {
             	new View.OnClickListener() {
             		public void onClick(View v) {
             			Intent intent = new Intent(m_activity, CollectContactsFromSMSActivity.class);
-            			m_activity.startActivityForResult(intent, 
+            			/* attention: if A calls startActivityFromResult(),
+            			 * only A.onActivityResult() will be called,
+            			 * so here, caller should be fragment not it's host activity,
+            			 * or your onActivityResult() won't be called
+            			 * 
+            			 * m_activity.startActivityForResult(intent, 
+            			 *		RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal());
+            			 */
+            			MembersFragment.this.startActivityForResult(intent, 
             					RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal());
             		}
             	});
@@ -141,5 +149,24 @@ public class MembersFragment extends Fragment {
     			null, // Optional arguments to supply to the loader at construction
     			new LoaderCallbacksForMemberList(getActivity(), m_adapter, m_db) // A LoaderManager.LoaderCallbacks implementation
     			);
+    }
+    
+    @Override
+    public void onActivityResult (int requestCode, int resultCode, Intent data){
+    	super.onActivityResult(requestCode, resultCode, data);
+   		System.out.println("MembersFragment.onActivityResult() called");
+    	
+    	if(RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == requestCode
+    			&& RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == resultCode){
+    		
+    		String[] names = data.getStringArrayExtra(CONST_STRING.names);
+    		String[] numbers = data.getStringArrayExtra(CONST_STRING.numbers);
+    		
+    		for(String name:names)
+    			System.out.println(name);
+    		
+    		for(String number:numbers)
+    			System.out.println(number);
+    	}
     }
 }

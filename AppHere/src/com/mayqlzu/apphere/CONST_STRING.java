@@ -6,5 +6,9 @@ public interface CONST_STRING {
 	public static final String date_sent	= "date_sent";
 	
 	public static final String selected_indice	= "selected_indice";
+	
+	
+	public static final String names		= "names";
+	public static final String numbers		= "numbers";
 
 }

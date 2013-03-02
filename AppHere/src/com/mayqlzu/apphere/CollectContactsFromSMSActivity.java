@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 
 public class CollectContactsFromSMSActivity extends Activity{
+	private String[] m_address;
+	private String[] m_body;
+	private String[] m_date_sent;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,23 +51,24 @@ public class CollectContactsFromSMSActivity extends Activity{
 				}while(cursor.moveToNext());
 				
 				// arrange data into 3 arrays
+				// save them in member variables cause i will use them in other functions
 				int count = msgs.size();
-				String[] address 	= new String[count];
-				String[] body 	= new String[count];
-				String[] date_sent 	= new String[count];
+				m_address 	= new String[count]; 
+				m_body 		= new String[count];
+				m_date_sent = new String[count];
 				for(int i=0; i<count; i++){
 					SMS msg = msgs.get(i);
-					address[i] = msg.m_address;
-					body[i] = msg.m_body;
-					date_sent[i] = msg.m_date_sent;
+					m_address[i] = msg.m_address;
+					m_body[i] = msg.m_body;
+					m_date_sent[i] = msg.m_date_sent;
 				}
 				
 				// start next Activity: FilterCandidatesActivity
 				Activity hostActivity = CollectContactsFromSMSActivity.this;
 				Intent intent = new Intent(hostActivity, FilterCandidatesActivity.class);
-				intent.putExtra(CONST_STRING.address, address);
-				intent.putExtra(CONST_STRING.body, body);
-				intent.putExtra(CONST_STRING.date_sent, date_sent);
+				intent.putExtra(CONST_STRING.address, m_address);
+				intent.putExtra(CONST_STRING.body, m_body);
+				intent.putExtra(CONST_STRING.date_sent, m_date_sent);
 				//System.out.println("check emun ordinal: " + RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
 				hostActivity.startActivityForResult(intent, 
 						RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
@@ -74,13 +79,48 @@ public class CollectContactsFromSMSActivity extends Activity{
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
     	super.onActivityResult(requestCode, resultCode, data);
-		System.out.println("onActivityResult() called");
+		//System.out.println("onActivityResult() called");
+    	
     	if(RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal() == requestCode
     			&& RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal() == resultCode){
     		int[] selectedIndice = data.getIntArrayExtra(CONST_STRING.selected_indice);
+    		
+    		/* check
     		for(int i: selectedIndice){
     			System.out.println(i);
     		}
+    		*/
+    		
+    		// filter user choice from all by index
+			// as user has filtered them, i call body as name and call address as number from now on :)
+    		ArrayList<String> selectedNames = new ArrayList<String>();
+    		ArrayList<String> selectedNumbers = new ArrayList<String>();
+    		for(int i: selectedIndice){
+    			selectedNames.add(m_body[i]);
+    			selectedNumbers.add(m_address[i]);
+    		}
+    		
+    		// ArrayList<String> => String[]
+    		String[] strArrNames = new String[selectedIndice.length];
+    		String[] strArrNumbers = new String[selectedIndice.length];
+    		
+    		for(int i=0; i<selectedNames.size(); i++)
+    			strArrNames[i] = selectedNames.get(i);
+    		
+    		for(int i=0; i<selectedNumbers.size(); i++)
+    			strArrNumbers[i] = selectedNumbers.get(i);
+    		
+    		// return user choice to caller
+			Intent intent = new Intent();
+			intent.putExtra(CONST_STRING.names, strArrNames);
+			intent.putExtra(CONST_STRING.numbers, strArrNumbers);
+			this.setResult(
+					// set result code with a same value of request code of caller
+					RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal(),
+					intent);
+			
+			// finish myself, caller will create a new instance next time
+			this.finish();
     	}
     }
 }
