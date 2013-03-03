@@ -80,9 +80,11 @@ public class MembersFragment extends Fragment {
             			
             			// get checked item ids
             			long[] ids = m_listView.getCheckedItemIds();
+            			/*
             			for(long id:ids){
             				System.out.println("checked id: " + id);
             			}
+            			*/
             			
             			// delete these records from DB by id
             			// todo: ok to use these ids as ids in DB ? so far so good
@@ -109,6 +111,16 @@ public class MembersFragment extends Fragment {
             			 */
             			MembersFragment.this.startActivityForResult(intent, 
             					RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal());
+            		}
+            	});
+        
+        // register callback on button "fromPhonebook"
+        thisFragmentView.findViewById(R.id.btn_fromPhonebook).setOnClickListener(
+            	new View.OnClickListener() {
+            		public void onClick(View v) {
+            			Intent intent = new Intent(m_activity, PickMembersFromPhonebookActivity.class);
+            			MembersFragment.this.startActivityForResult(intent, 
+            					RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal());
             		}
             	});
         
@@ -156,8 +168,10 @@ public class MembersFragment extends Fragment {
     	super.onActivityResult(requestCode, resultCode, data);
    		System.out.println("MembersFragment.onActivityResult() called");
     	
-    	if(RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == requestCode
-    			&& RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == resultCode){
+    	if((RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == requestCode
+    			&& RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal() == resultCode)
+    			|| (RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal() == requestCode
+    	    			&& RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal() == resultCode)){
     		
     		String[] names = data.getStringArrayExtra(CONST_STRING.names);
     		String[] numbers = data.getStringArrayExtra(CONST_STRING.numbers);

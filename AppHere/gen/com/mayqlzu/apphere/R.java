@@ -42,6 +42,7 @@ public final class R {
         public static final int filter_candidates_layout=0x7f030004;
         public static final int members_fragment_layout=0x7f030005;
         public static final int other_fragment_layout=0x7f030006;
+        public static final int pick_members_from_phonebook_layout=0x7f030007;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
@@ -73,6 +74,7 @@ public final class R {
         public static final int title_activity_collectContactsFromSMS=0x7f040010;
         public static final int title_activity_filter_candidates=0x7f040015;
         public static final int title_activity_main=0x7f040003;
+        public static final int title_activity_pick_members_from_phonebook=0x7f04001a;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

@@ -4,6 +4,7 @@
     android:versionName="1.0" >
     
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-sdk
         android:minSdkVersion="13"
@@ -31,6 +32,11 @@
         <activity
             android:name=".FilterCandidatesActivity"
             android:label="@string/title_activity_filter_candidates" >
+        </activity>
+        
+        <activity
+            android:name=".PickMembersFromPhonebookActivity"
+            android:label="@string/title_activity_pick_members_from_phonebook" >
         </activity>
         
     </application>

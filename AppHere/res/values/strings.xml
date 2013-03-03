@@ -28,4 +28,6 @@
     <string name="save_into_phonebook">SaveIntoPhoneBookByTheWay</string>
     <string name="choose_all">ChooseAll</string>
     <string name="choose_marked_only">MarkedOnly</string>
+    
+    <string name="title_activity_pick_members_from_phonebook">title_activity_pick_members_from_phonebook</string>
 </resources>
