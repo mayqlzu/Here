@@ -61,6 +61,13 @@ public class Database extends SQLiteOpenHelper {
 				MEMBERS_TABLE, new String[]{ID, NAME}, null, null, null, null, null);
 	}
 	
+	public Cursor queryAllNamesAndNumbers(){
+		return this.getReadableDatabase().query(
+				// add ID if you want to bind it to Adapter
+				MEMBERS_TABLE, new String[]{NAME, NUMBER}, null, null, null, null, null);
+	}
+
+	
 	public void addOneMember(String name, String number){
 		// take care of empty param
 		if(name.isEmpty() || number.isEmpty()){

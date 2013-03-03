@@ -10,6 +10,7 @@
 	    android:inputType="textMultiLine"
 	    android:layout_centerHorizontal="true" 
 	    android:layout_margin="10dip"
+	    android:hint="@string/message"
 	    />
     
    	<Button

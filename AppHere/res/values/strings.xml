@@ -30,4 +30,7 @@
     <string name="choose_marked_only">MarkedOnly</string>
     
     <string name="title_activity_pick_members_from_phonebook">title_activity_pick_members_from_phonebook</string>
+    
+    <string name="message">Message</string>
+    
 </resources>

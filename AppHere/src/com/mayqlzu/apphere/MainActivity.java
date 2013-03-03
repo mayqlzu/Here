@@ -17,6 +17,10 @@ public class MainActivity extends Activity {
 	private Fragment m_otherFragment;
 	
 	private Database m_db;
+	
+	public Database getDB(){
+		return m_db;
+	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

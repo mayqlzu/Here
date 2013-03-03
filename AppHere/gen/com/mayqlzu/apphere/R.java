@@ -66,6 +66,7 @@ public final class R {
         public static final int hint=0x7f040011;
         public static final int members=0x7f040004;
         public static final int menu_settings=0x7f040002;
+        public static final int message=0x7f04001b;
         public static final int name=0x7f04000a;
         public static final int number=0x7f04000b;
         public static final int other=0x7f040007;
