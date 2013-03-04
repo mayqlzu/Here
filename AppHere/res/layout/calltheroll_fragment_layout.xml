@@ -12,7 +12,7 @@
         />
     
     <ListView
-        android:id="@+id/members_left_list"
+        android:id="@+id/abcent_list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="2"
@@ -30,14 +30,14 @@
 		    android:inputType="textMultiLine"
 		    android:maxWidth="200dip"
 		    android:maxHeight="100dip"
-		    android:hint="@string/message"
+		    android:hint="@string/hurry_up"
 	    />
     
 	   	<Button
 	  		android:id="@+id/btn_broadcast"
 	       	android:layout_width="wrap_content"
 	       	android:layout_height="wrap_content"
-	       	android:text="@string/hurry_up"
+	       	android:text="@string/broadcast"
 	       	android:layout_toRightOf="@id/broadcast_text"
 	       	android:layout_marginLeft="20dip"
 	       	/>

@@ -15,6 +15,7 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
+        public static final int abcent_list=0x7f070003;
         public static final int broadcast_text=0x7f070000;
         public static final int btn_addOneByHand=0x7f070013;
         public static final int btn_broadcast=0x7f070001;
@@ -30,7 +31,6 @@ public final class R {
         public static final int candidates_list=0x7f07000a;
         public static final int checkBox=0x7f07000b;
         public static final int hint=0x7f070005;
-        public static final int members_left_list=0x7f070003;
         public static final int members_listview=0x7f070010;
         public static final int menu_settings=0x7f070016;
         public static final int range=0x7f070006;
@@ -79,6 +79,7 @@ public final class R {
         public static final int save_into_phonebook=0x7f040017;
         public static final int start=0x7f040013;
         public static final int status=0x7f04001c;
+        public static final int stop=0x7f04001e;
         public static final int title_activity_collectContactsFromSMS=0x7f040010;
         public static final int title_activity_filter_candidates=0x7f040015;
         public static final int title_activity_main=0x7f040003;

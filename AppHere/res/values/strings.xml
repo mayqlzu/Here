@@ -34,6 +34,7 @@
     <string name="message">Message</string>
     
     <string name="status">foo arrived, n left</string>
-    <string name="hurry_up">hurry up</string>
+    <string name="hurry_up">message to abcent</string>
+    <string name="stop">Stop</string>
     
 </resources>
