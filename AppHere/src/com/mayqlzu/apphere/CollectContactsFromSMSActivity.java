@@ -3,6 +3,7 @@ package com.mayqlzu.apphere;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -26,12 +27,18 @@ public class CollectContactsFromSMSActivity extends Activity{
         btn_start.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Activity hostActivity = CollectContactsFromSMSActivity.this;
+				
 				// read inbox
 				// todo: do it in another thread to avoid UI freeze
 				Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), 
 						null, null, null, null);
 				cursor.moveToFirst();
 				if(false == cursor.moveToFirst()){
+	    			new AlertDialog.Builder(hostActivity)    
+	                .setMessage("inbox is empty")  
+	                .setPositiveButton("OK", null)  
+	                .show();
 					return;
 				}
 				ArrayList<SMS> msgs = new ArrayList<SMS>();
@@ -65,7 +72,6 @@ public class CollectContactsFromSMSActivity extends Activity{
 				}
 				
 				// start next Activity: FilterCandidatesActivity
-				Activity hostActivity = CollectContactsFromSMSActivity.this;
 				Intent intent = new Intent(hostActivity, FilterCandidatesActivity.class);
 				intent.putExtra(CONST_STRING.address, m_address);
 				intent.putExtra(CONST_STRING.body, m_body);
