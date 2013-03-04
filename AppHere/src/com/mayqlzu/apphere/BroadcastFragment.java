@@ -2,17 +2,19 @@ package com.mayqlzu.apphere;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class BroadcastFragment extends Fragment {
@@ -49,13 +51,47 @@ public class BroadcastFragment extends Fragment {
     	
         // register listener to button "broadcast"
     	Activity hostActivity = this.getActivity();
-        hostActivity.findViewById(R.id.btn_broadcast).setOnClickListener(new Listener(this));
+        Button btn_broadcast = (Button)hostActivity.findViewById(R.id.btn_broadcast);
+        btn_broadcast.setOnClickListener(new ButtonListener(this));
+        btn_broadcast.setEnabled(false);
+        EditText editText = (EditText)hostActivity.findViewById(R.id.broadcast_text);
+        editText.addTextChangedListener(new MyTextWatcher(btn_broadcast));
     }
     
-	private class Listener implements View.OnClickListener{
+    private class MyTextWatcher implements TextWatcher{
+    	private Button m_btn_broadcast;
+    	
+    	MyTextWatcher(Button b){
+    		m_btn_broadcast = b;
+    	}
+
+		@Override
+		public void afterTextChanged(Editable arg0) {
+			// TODO Auto-generated method stub
+			//Log.d("MyTextWatcher", "afterTextChanged");
+			m_btn_broadcast.setEnabled(arg0.length()>0);
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+				int arg3) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+				int arg3) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
+    
+	private class ButtonListener implements View.OnClickListener{
 		private BroadcastFragment m_fragment;
 		
-		public Listener(BroadcastFragment f){
+		public ButtonListener(BroadcastFragment f){
 			m_fragment = f;
 		}
 		
@@ -64,14 +100,8 @@ public class BroadcastFragment extends Fragment {
 			Activity hostActivity = m_fragment.getActivity();
 			
 			// get text
-    		String message = ((EditText)(hostActivity.findViewById(R.id.broadcast_text))).getText().toString();
-    		if(0 == message.length()){
-    			new AlertDialog.Builder(hostActivity)    
-    		                .setMessage("empty :(")  
-    		                .setPositiveButton("OK", null)  
-    		                .show();
-    			return;
-    		}
+    		EditText editText = (EditText)(hostActivity.findViewById(R.id.broadcast_text));
+    		String message = editText.getText().toString();
     		
     		// get numbers and send sms
     		ArrayList<Contact> recvs = m_fragment.getAllReceivers();
@@ -83,6 +113,10 @@ public class BroadcastFragment extends Fragment {
     			m_fragment.sendSMS(to, message);
     		}
     		
+    		// clear editText
+    		editText.setText(null);
+    		
+    		// hint
     		new AlertDialog.Builder(hostActivity)    
     		                .setMessage("done :)")  
     		                .setPositiveButton("OK", null)  

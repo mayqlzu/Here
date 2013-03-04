@@ -79,7 +79,7 @@ public class CallTheRollFragment extends Fragment {
 		@Override
 		public void afterTextChanged(Editable arg0) {
 			// TODO Auto-generated method stub
-			Log.d("MyTextWatcher", "afterTextChanged");
+			//Log.d("MyTextWatcher", "afterTextChanged");
 			m_btn_broadcast.setEnabled(arg0.length()>0);
 		}
 
@@ -112,11 +112,11 @@ public class CallTheRollFragment extends Fragment {
 		
 		@Override
     	public void onClick(View v) {
-			Log.d(m_tag, "onClicked");
+			//Log.d(m_tag, "onClicked");
 			
 			switch(v.getId()){
 			case R.id.btn_start_stop:
-				Log.d(m_tag, "btn_start_stop clicked");
+				//Log.d(m_tag, "btn_start_stop clicked");
 				
 				// switch status
 				m_isActive = !m_isActive;
@@ -147,7 +147,7 @@ public class CallTheRollFragment extends Fragment {
 	            break;
 	            
 			case R.id.btn_broadcast:
-				Log.d(m_tag, "btn_broadcast clicked");
+				//Log.d(m_tag, "btn_broadcast clicked");
 				
 				// get receiver numbers
 				String[] numbers = Contact.filterNumbers(m_fragment.m_abcent);
