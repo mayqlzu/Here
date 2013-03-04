@@ -33,7 +33,7 @@ public class BroadcastFragment extends Fragment {
     	
     	MainActivity hostActivity = (MainActivity)(this.getActivity());
     	Cursor cursor = hostActivity.getDB().queryAllNamesAndNumbers();
-    	if(0 == cursor.getCount())
+    	if(false == cursor.moveToFirst())
     		return result;
     	while(cursor.moveToNext()){
     		String name = cursor.getString(cursor.getColumnIndex(Database.NAME));

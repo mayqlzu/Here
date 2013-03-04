@@ -145,9 +145,9 @@ public class PickMembersFromPhonebookActivity extends Activity{
     	ArrayList<Contact> result = new ArrayList<Contact>();
     	String TAG = "reading phonebook";
         Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        if(0 == cursor.getCount())
+        if(false == cursor.moveToFirst())
         	return result;
-        while(cursor.moveToNext()){
+        do {
             String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
             String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             
@@ -158,7 +158,7 @@ public class PickMembersFromPhonebookActivity extends Activity{
                 Cursor c = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
                          ContactsContract.CommonDataKinds.Phone.CONTACT_ID+ " = " + id,null,null);
                 String number = "";
-                while(c.moveToNext()){
+                while(c.getCount() > 0 && c.moveToNext()){
                 	// remember the last if multiple
                     number = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     //Log.d(TAG    , "Number is : "+number);
@@ -170,7 +170,7 @@ public class PickMembersFromPhonebookActivity extends Activity{
                 }
                 c.close();
             }
-        }
+        } while(cursor.moveToNext());
         cursor.close();
         return result;
     }

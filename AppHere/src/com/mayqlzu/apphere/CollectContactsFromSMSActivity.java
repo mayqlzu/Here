@@ -31,8 +31,9 @@ public class CollectContactsFromSMSActivity extends Activity{
 				Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), 
 						null, null, null, null);
 				cursor.moveToFirst();
-				if(0 == cursor.getCount())
+				if(false == cursor.moveToFirst()){
 					return;
+				}
 				ArrayList<SMS> msgs = new ArrayList<SMS>();
 		        //System.out.println(msgs.size() + " candidates found");
 				do{
