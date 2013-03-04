@@ -144,7 +144,7 @@ public class CallTheRollFragment extends Fragment {
 	                    android.R.layout.simple_list_item_1,
 	                    names);
 	            listView.setAdapter(adapter);
-	            break;
+	            break; // do NOT forget
 	            
 			case R.id.btn_broadcast:
 				//Log.d(m_tag, "btn_broadcast clicked");
@@ -169,7 +169,7 @@ public class CallTheRollFragment extends Fragment {
     		                .setMessage("sent :)")  
     		                .setPositiveButton("OK", null)  
     		                .show();
-				break;
+	            break;
             
 			}
 		}
