@@ -33,4 +33,7 @@
     
     <string name="message">Message</string>
     
+    <string name="status">foo arrived, n left</string>
+    <string name="hurry_up">hurry up</string>
+    
 </resources>
