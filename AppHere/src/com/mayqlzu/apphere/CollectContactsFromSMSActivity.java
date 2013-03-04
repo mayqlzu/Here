@@ -22,6 +22,16 @@ public class CollectContactsFromSMSActivity extends Activity{
         
         setContentView(R.layout.collect_contacts_from_sms_layout);
         
+        // register callback for button "cancel"
+        Button btn_cancel = (Button)this.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Activity hostActivity = CollectContactsFromSMSActivity.this;
+				hostActivity.finish();
+			}
+        });
+        
         // register callback for button "start"
         Button btn_start = (Button)this.findViewById(R.id.btn_start);
         btn_start.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +44,7 @@ public class CollectContactsFromSMSActivity extends Activity{
 				Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), 
 						null, null, null, null);
 				cursor.moveToFirst();
+				// hint user if inbox is empty
 				if(false == cursor.moveToFirst()){
 	    			new AlertDialog.Builder(hostActivity)    
 	                .setMessage("inbox is empty")  
