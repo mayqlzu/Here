@@ -153,12 +153,16 @@ public class CallTheRollFragment extends Fragment {
 				String[] numbers = Contact.filterNumbers(m_fragment.m_abcent);
 				
 				// get text
-	    		String message = ((EditText)(m_hostActivity.findViewById(R.id.broadcast_text))).getText().toString();
+	    		EditText editText = (EditText)(m_hostActivity.findViewById(R.id.broadcast_text));
+	    		String message = editText.getText().toString();
 	    		
 	    		// send
 				for(String n: numbers){
 					m_fragment.sendSMS(n, message);
 				}
+				
+				// clear ediText
+				editText.setText(null);
 				
 				// hint
     			new AlertDialog.Builder(m_hostActivity)    
