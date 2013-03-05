@@ -65,11 +65,11 @@ public class CallTheRollFragment extends Fragment {
     	Cursor cursor = hostActivity.getDB().queryAllNamesAndNumbers();
     	if(false == cursor.moveToFirst())
     		return result;
-    	while(cursor.moveToNext()){
+    	do{
     		String name = cursor.getString(cursor.getColumnIndex(Database.NAME));
     		String number = cursor.getString(cursor.getColumnIndex(Database.NUMBER));
     		result.add(new Contact(name, number));
-    	}
+    	}while(cursor.moveToNext());
     	
     	return result;
     }
