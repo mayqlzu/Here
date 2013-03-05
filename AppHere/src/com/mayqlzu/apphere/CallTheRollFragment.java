@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class CallTheRollFragment extends Fragment {
         btn_start_stop.setOnClickListener(buttonListener);
         editText.addTextChangedListener(new MyTextWatcher(btn_broadcast));
         
-        m_receiver = new SMSReceiver();
+        m_receiver = new SMSReceiver(this);
     }
     
     private void sendSMS(String toNumber, String message){
@@ -140,12 +141,15 @@ public class CallTheRollFragment extends Fragment {
 	    		String[] names = Contact.filterNames(m_fragment.m_abcent);
 	    		
 	    		// refresh UI
+	    		/*
 	            ListView listView = (ListView)m_hostActivity.findViewById(R.id.abcent_list);
 	            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 	            		m_hostActivity,  // not sure: fragment or hostActivity ?
 	                    android.R.layout.simple_list_item_1,
 	                    names);
 	            listView.setAdapter(adapter);
+	            */
+	    		m_fragment.refreshUI();
 	            
 	            if(m_fragment.m_isActive){
 	            	// i have to register broadcastReceiver to Activity, no choice
@@ -186,4 +190,47 @@ public class CallTheRollFragment extends Fragment {
 			}
 		}
     }
+    
+    private void refreshUI(){
+    	String[] names = Contact.filterNames(m_abcent);
+    	Activity hostActivity = this.getActivity();
+    	ListView listView = (ListView)hostActivity.findViewById(R.id.abcent_list);
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+    		hostActivity,  // not sure: fragment or hostActivity ?
+            android.R.layout.simple_list_item_1,
+            names);
+    	listView.setAdapter(adapter);
+    }
+
+    // created myself, not system callback API
+	public void onSMSArrived(String fromNumber, String message) {
+		Log.d("CallTherRollFragment", "onSMSArrived()");
+		// ignore msg other than "here"
+		if(!message.equals(CONST_STRING.HERE))
+			return;
+		
+		// update m_abcent if found
+		removeMemberFromArrayIfFound(fromNumber);
+		
+		refreshUI();
+	}
+	
+	// do NOT refresh UI in this function, caller will take care of it
+	private void removeMemberFromArrayIfFound(final String number){
+		/* 
+		 * attention: do not delete any item when iterating, or you may introduce chaos
+		 * so i remember the index and delete it later, do in 2 steps
+		 */
+		int index_found = -1;  //means not found
+		for(int i=0; i<m_abcent.size(); i++){
+			if(number.equals(m_abcent.get(i).m_number)){
+				index_found = i;
+				// assume numbers are all unique, so find one is enough
+				break;
+			}
+		}
+		if(index_found >= 0){
+			m_abcent.remove(index_found);
+		}
+	}
 }

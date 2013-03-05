@@ -11,6 +11,11 @@ import android.util.Log;
 public class SMSReceiver extends BroadcastReceiver {
     public static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
     private static final String TAG = "SMSReceiver";
+    private CallTheRollFragment m_fragment; // if sms arrived, notify this fragment
+    
+    SMSReceiver(CallTheRollFragment f){
+    	m_fragment = f;
+    }
 
 
     @Override
@@ -22,14 +27,18 @@ public class SMSReceiver extends BroadcastReceiver {
             if (bundle != null) {
                 Object[] pdus = (Object[]) bundle.get("pdus");
                 final SmsMessage[] messages = new SmsMessage[pdus.length];
-                // todo: think, why multiple not one?
+                /* todo: think, why multiple not one?
+                 * get the last for now
+                 */
+                String fromNumber = "";
+                String message = "";
                 for (int i = 0; i < pdus.length; i++) {
                     SmsMessage msg = SmsMessage.createFromPdu((byte[]) pdus[i]);
                     messages[i] = msg;
-                    Log.i(TAG, "Message recieved: " 
-                    		+ "from: " + msg.getOriginatingAddress() +
-                    		" content: " + msg.getMessageBody());
+                    fromNumber = msg.getOriginatingAddress();
+                    message = msg.getMessageBody();
                 }
+                m_fragment.onSMSArrived(fromNumber, message);
             }
         }
     }

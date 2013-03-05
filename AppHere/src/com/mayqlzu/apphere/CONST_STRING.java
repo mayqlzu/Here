@@ -10,5 +10,7 @@ public interface CONST_STRING {
 	
 	public static final String names		= "names";
 	public static final String numbers		= "numbers";
+	
+	public static final String HERE			= "here";
 
 }
