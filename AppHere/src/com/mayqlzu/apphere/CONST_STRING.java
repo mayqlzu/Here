@@ -13,4 +13,6 @@ public interface CONST_STRING {
 	
 	public static final String HERE			= "here";
 
+	public static final String ARRIVED		= "Arrived";
+	public static final String LEFT			= "Left";
 }

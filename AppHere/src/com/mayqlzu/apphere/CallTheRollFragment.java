@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class CallTheRollFragment extends Fragment {
 	private boolean m_isActive = false; // inactive initially
@@ -47,6 +48,7 @@ public class CallTheRollFragment extends Fragment {
         btn_broadcast.setOnClickListener(buttonListener);
         btn_start_stop.setOnClickListener(buttonListener);
         editText.addTextChangedListener(new MyTextWatcher(btn_broadcast));
+        updateStatusInfoVisiblity();
         
         m_receiver = new SMSReceiver(this);
     }
@@ -141,15 +143,7 @@ public class CallTheRollFragment extends Fragment {
 	    		String[] names = Contact.filterNames(m_fragment.m_abcent);
 	    		
 	    		// refresh UI
-	    		/*
-	            ListView listView = (ListView)m_hostActivity.findViewById(R.id.abcent_list);
-	            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-	            		m_hostActivity,  // not sure: fragment or hostActivity ?
-	                    android.R.layout.simple_list_item_1,
-	                    names);
-	            listView.setAdapter(adapter);
-	            */
-	    		m_fragment.refreshUI();
+	    		m_fragment.refreshListUI();
 	            
 	            if(m_fragment.m_isActive){
 	            	// i have to register broadcastReceiver to Activity, no choice
@@ -159,6 +153,9 @@ public class CallTheRollFragment extends Fragment {
 	            }else{
 	            	m_hostActivity.unregisterReceiver(m_fragment.m_receiver);
 	            }
+	            
+	            // show or hide status info
+	    		updateStatusInfoVisiblity();
 	            
 	            break; // do NOT forget
 	            
@@ -191,7 +188,7 @@ public class CallTheRollFragment extends Fragment {
 		}
     }
     
-    private void refreshUI(){
+    private void refreshListUI(){
     	String[] names = Contact.filterNames(m_abcent);
     	Activity hostActivity = this.getActivity();
     	ListView listView = (ListView)hostActivity.findViewById(R.id.abcent_list);
@@ -210,13 +207,17 @@ public class CallTheRollFragment extends Fragment {
 			return;
 		
 		// update m_abcent if found
-		removeMemberFromArrayIfFound(fromNumber);
+		String associatedNameInList = removeMemberFromArrayIfFound(fromNumber);
+		if(null != associatedNameInList){
+			refreshListUI();
 		
-		refreshUI();
+			// update status info text
+			updateStatusInfoText(associatedNameInList);
+		}
 	}
 	
 	// do NOT refresh UI in this function, caller will take care of it
-	private void removeMemberFromArrayIfFound(final String number){
+	private String removeMemberFromArrayIfFound(final String number){
 		/* 
 		 * attention: do not delete any item when iterating, or you may introduce chaos
 		 * so i remember the index and delete it later, do in 2 steps
@@ -230,7 +231,24 @@ public class CallTheRollFragment extends Fragment {
 			}
 		}
 		if(index_found >= 0){
-			m_abcent.remove(index_found);
+			Contact removedItem = m_abcent.remove(index_found);
+			return removedItem.m_name;
 		}
+		
+		return null;
+	}
+	
+	private void updateStatusInfoVisiblity(){
+		// decide visibility first
+		TextView statusTextView = (TextView)(this.getActivity().findViewById(R.id.status));
+		int newStatus = m_isActive ? View.VISIBLE: View.INVISIBLE;
+		statusTextView.setVisibility(newStatus);
+	}
+	
+	private void updateStatusInfoText(String who){
+		String newStatus = who + " " + CONST_STRING.ARRIVED + ", " 
+					+ m_abcent.size() + " " + CONST_STRING.LEFT;
+		TextView textView = (TextView)(this.getActivity().findViewById(R.id.status));
+		textView.setText(newStatus);
 	}
 }
