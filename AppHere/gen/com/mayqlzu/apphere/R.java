@@ -16,6 +16,7 @@ public final class R {
     }
     public static final class id {
         public static final int abcent_list=0x7f070003;
+        public static final int author=0x7f070017;
         public static final int broadcast_text=0x7f070000;
         public static final int btn_addOneByHand=0x7f070013;
         public static final int btn_broadcast=0x7f070001;
@@ -24,15 +25,18 @@ public final class R {
         public static final int btn_choose_marked_only=0x7f07000d;
         public static final int btn_delSelected=0x7f07000f;
         public static final int btn_deleteAll=0x7f07000e;
+        public static final int btn_dislike=0x7f070019;
         public static final int btn_fromPhonebook=0x7f070015;
         public static final int btn_fromSMS=0x7f070014;
+        public static final int btn_like=0x7f070018;
         public static final int btn_start=0x7f070009;
         public static final int btn_start_stop=0x7f070004;
         public static final int candidates_list=0x7f07000a;
         public static final int checkBox=0x7f07000b;
         public static final int hint=0x7f070005;
+        public static final int imageView=0x7f070016;
         public static final int members_listview=0x7f070010;
-        public static final int menu_settings=0x7f070016;
+        public static final int menu_settings=0x7f07001a;
         public static final int range=0x7f070006;
         public static final int seekBar=0x7f070007;
         public static final int status=0x7f070002;
@@ -56,6 +60,7 @@ public final class R {
         public static final int add_members_from_phonebook=0x7f04000e;
         public static final int add_one_by_hand=0x7f04000c;
         public static final int app_name=0x7f040000;
+        public static final int author=0x7f04001f;
         public static final int broadcast=0x7f040005;
         public static final int call_the_roll=0x7f040006;
         public static final int cancel=0x7f040014;
@@ -64,10 +69,13 @@ public final class R {
         public static final int choose_marked_only=0x7f040019;
         public static final int delete_all=0x7f040008;
         public static final int delete_selected=0x7f040009;
+        public static final int dislike=0x7f040021;
+        public static final int exit=0x7f040022;
         public static final int find_contacts_from_sms=0x7f04000d;
         public static final int hello_world=0x7f040001;
         public static final int hint=0x7f040011;
         public static final int hurry_up=0x7f04001d;
+        public static final int like=0x7f040020;
         public static final int members=0x7f040004;
         public static final int menu_settings=0x7f040002;
         public static final int message=0x7f04001b;

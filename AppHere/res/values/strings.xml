@@ -37,4 +37,8 @@
     <string name="hurry_up">message to abcent</string>
     <string name="stop">Stop</string>
     
+    <string name="author">mayqlzu@gmail.com</string>
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="exit">Exit</string>
 </resources>
