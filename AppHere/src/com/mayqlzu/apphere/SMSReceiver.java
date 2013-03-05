@@ -9,7 +9,7 @@ import android.util.Log;
 // import android.telephony.gsm.SmsMessage; which one? not sure
 
 public class SMSReceiver extends BroadcastReceiver {
-    private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+    public static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
     private static final String TAG = "SMSReceiver";
 
 
@@ -26,7 +26,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 for (int i = 0; i < pdus.length; i++) {
                     SmsMessage msg = SmsMessage.createFromPdu((byte[]) pdus[i]);
                     messages[i] = msg;
-                    Log.i(TAG,"Message recieved: " 
+                    Log.i(TAG, "Message recieved: " 
                     		+ "from: " + msg.getOriginatingAddress() +
                     		" content: " + msg.getMessageBody());
                 }

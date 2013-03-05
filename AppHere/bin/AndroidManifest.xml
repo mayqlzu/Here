@@ -41,6 +41,7 @@
             android:label="@string/title_activity_pick_members_from_phonebook" >
         </activity>
         
+        <!--
         <receiver android:name=".SMSReceiver" 
             android:enabled="true"
             android:permission="android.permission.RECEIVE_SMS" >
@@ -48,6 +49,7 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
             </intent-filter>
         </receiver>
+        -->
         
     </application>
     

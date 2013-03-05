@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +22,7 @@ import android.widget.ListView;
 public class CallTheRollFragment extends Fragment {
 	private boolean m_isActive = false; // inactive initially
 	private ArrayList<Contact> m_abcent;
+	private SMSReceiver m_receiver;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +47,7 @@ public class CallTheRollFragment extends Fragment {
         btn_start_stop.setOnClickListener(buttonListener);
         editText.addTextChangedListener(new MyTextWatcher(btn_broadcast));
         
+        m_receiver = new SMSReceiver();
     }
     
     private void sendSMS(String toNumber, String message){
@@ -119,16 +121,16 @@ public class CallTheRollFragment extends Fragment {
 				//Log.d(m_tag, "btn_start_stop clicked");
 				
 				// switch status
-				m_isActive = !m_isActive;
+				m_fragment.m_isActive = !m_fragment.m_isActive;
 				
 				// change button text
-	    		String text = m_isActive ? 
+	    		String text = m_fragment.m_isActive ? 
 	    				m_hostActivity.getString(R.string.stop) 
 	    				: m_hostActivity.getString(R.string.start);
 	    		((Button)v).setText(text);
 	    		
 	    		// reconstruct or clear member list
-	    		if(m_isActive){
+	    		if(m_fragment.m_isActive){
 	    			m_fragment.m_abcent= m_fragment.getAllReceivers();
 	    		}else{
 	    			m_fragment.m_abcent.clear();
@@ -144,6 +146,16 @@ public class CallTheRollFragment extends Fragment {
 	                    android.R.layout.simple_list_item_1,
 	                    names);
 	            listView.setAdapter(adapter);
+	            
+	            if(m_fragment.m_isActive){
+	            	// i have to register broadcastReceiver to Activity, no choice
+	            	m_hostActivity.registerReceiver(
+	            		m_fragment.m_receiver,
+	            		new IntentFilter(SMSReceiver.SMS_RECEIVED));
+	            }else{
+	            	m_hostActivity.unregisterReceiver(m_fragment.m_receiver);
+	            }
+	            
 	            break; // do NOT forget
 	            
 			case R.id.btn_broadcast:
