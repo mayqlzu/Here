@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 public class CallTheRollFragment extends Fragment {
 	private boolean m_isActive = false; // inactive initially
-	private ArrayList<Contact> m_abcent;
+	private ArrayList<Contact> m_abcent = new ArrayList<Contact>();
 	private SMSReceiver m_receiver;
 	
     @Override
@@ -154,8 +154,9 @@ public class CallTheRollFragment extends Fragment {
 	            	m_hostActivity.unregisterReceiver(m_fragment.m_receiver);
 	            }
 	            
+	    		m_fragment.updateStatusInfoText("?");
 	            // show or hide status info
-	    		updateStatusInfoVisiblity();
+	    		m_fragment.updateStatusInfoVisiblity();
 	            
 	            break; // do NOT forget
 	            
