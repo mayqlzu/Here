@@ -12,12 +12,15 @@
 	    android:layout_weight="1"
 	    android:orientation="horizontal" >
 
+	    <!-- add attributes: focusable and focusableInTouchMode to rob focus from
+	    the first EditText, and the annoying keyboard won't show when launched -->
    		<TextView 
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:gravity="center"
-        	android:text="@string/place_holder" 
-        	android:visibility="invisible"/>
+        	android:focusable="true"
+        	android:focusableInTouchMode="true"/>
+   		
    		<Button
 		    android:id="@+id/btn_deleteAll"
         	android:layout_width="wrap_content"
