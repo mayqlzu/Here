@@ -84,9 +84,9 @@ public class CollectContactsFromSMSActivity extends Activity{
 				
 				// start next Activity: FilterCandidatesActivity
 				Intent intent = new Intent(hostActivity, FilterCandidatesActivity.class);
-				intent.putExtra(CONST_STRING.address, m_address);
-				intent.putExtra(CONST_STRING.body, m_body);
-				intent.putExtra(CONST_STRING.date_sent, m_date_sent);
+				intent.putExtra(CONST.address, m_address);
+				intent.putExtra(CONST.body, m_body);
+				intent.putExtra(CONST.date_sent, m_date_sent);
 				//System.out.println("check emun ordinal: " + RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
 				hostActivity.startActivityForResult(intent, 
 						RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal());
@@ -101,7 +101,7 @@ public class CollectContactsFromSMSActivity extends Activity{
     	
     	if(RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal() == requestCode
     			&& RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal() == resultCode){
-    		int[] selectedIndice = data.getIntArrayExtra(CONST_STRING.selected_indice);
+    		int[] selectedIndice = data.getIntArrayExtra(CONST.selected_indice);
     		
     		/* check
     		for(int i: selectedIndice){
@@ -130,8 +130,8 @@ public class CollectContactsFromSMSActivity extends Activity{
     		
     		// return user choice to caller
 			Intent intent = new Intent();
-			intent.putExtra(CONST_STRING.names, strArrNames);
-			intent.putExtra(CONST_STRING.numbers, strArrNumbers);
+			intent.putExtra(CONST.names, strArrNames);
+			intent.putExtra(CONST.numbers, strArrNumbers);
 			this.setResult(
 					// set result code with a same value of request code of caller
 					RequestCodes.MEMBERS_FRAGMENT_TO_COLLECT_CONTACTS_FROM_SMS.ordinal(),

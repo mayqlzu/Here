@@ -203,7 +203,7 @@ public class CallTheRollFragment extends Fragment {
 	public void onSMSArrived(String fromNumber, String message) {
 		Log.d("CallTherRollFragment", "onSMSArrived()");
 		// ignore msg other than "here"
-		if(!message.equals(CONST_STRING.HERE))
+		if(!message.equals(CONST.HERE))
 			return;
 		
 		// update m_abcent if found
@@ -246,8 +246,8 @@ public class CallTheRollFragment extends Fragment {
 	}
 	
 	private void updateStatusInfoText(String who){
-		String newStatus = who + " " + CONST_STRING.ARRIVED + ", " 
-					+ m_abcent.size() + " " + CONST_STRING.LEFT;
+		String newStatus = who + " " + CONST.ARRIVED + ", " 
+					+ m_abcent.size() + " " + CONST.LEFT;
 		TextView textView = (TextView)(this.getActivity().findViewById(R.id.status));
 		textView.setText(newStatus);
 	}

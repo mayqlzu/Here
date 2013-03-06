@@ -1,6 +1,6 @@
 package com.mayqlzu.apphere;
 
-public interface CONST_STRING {
+public interface CONST {
 	public static final String body 		= "body";
 	public static final String address 		= "address";
 	public static final String date_sent	= "date_sent";
@@ -15,4 +15,6 @@ public interface CONST_STRING {
 
 	public static final String ARRIVED		= "Arrived";
 	public static final String LEFT			= "Left";
+	
+	public static final int VALID_NUMBER_LEN	= 11;
 }

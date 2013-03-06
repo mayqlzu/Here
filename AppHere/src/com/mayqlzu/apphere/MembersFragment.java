@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -124,6 +128,14 @@ public class MembersFragment extends Fragment {
             		}
             	});
         
+        EditText name = (EditText)thisFragmentView.findViewById(R.id.text_name);
+        EditText number = (EditText)thisFragmentView.findViewById(R.id.text_number);
+        Button add = (Button)thisFragmentView.findViewById(R.id.btn_addOneByHand);
+        add.setEnabled(false);
+        MyTextWatcher textWatcher = new MyTextWatcher(name, number, add);
+        name.addTextChangedListener(textWatcher);
+        number.addTextChangedListener(textWatcher);
+        
         return thisFragmentView;
     }
 	
@@ -173,8 +185,8 @@ public class MembersFragment extends Fragment {
     			|| (RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal() == requestCode
     	    			&& RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal() == resultCode)){
     		
-    		String[] names = data.getStringArrayExtra(CONST_STRING.names);
-    		String[] numbers = data.getStringArrayExtra(CONST_STRING.numbers);
+    		String[] names = data.getStringArrayExtra(CONST.names);
+    		String[] numbers = data.getStringArrayExtra(CONST.numbers);
     		
     		/* check
     		for(String name:names)
@@ -195,5 +207,41 @@ public class MembersFragment extends Fragment {
         	// refresh UI
         	this.refreshListView();
     	}
+    }
+    
+    private class MyTextWatcher implements TextWatcher{
+    	private EditText m_name;
+    	private EditText m_number;
+    	private Button m_add;
+    	
+    	MyTextWatcher(EditText name, EditText number, Button add){
+    		m_name = name;
+    		m_number = number;
+    		m_add = add;
+    	}
+
+		@Override
+		public void afterTextChanged(Editable arg0) {
+			//Log.d("MembersFragment", "afterTextChanged()");
+			String name = m_name.getText().toString();
+			String number = m_number.getText().toString();
+			m_add.setEnabled(name.length()>0 && number.length() >= CONST.VALID_NUMBER_LEN);
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+				int arg3) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+				int arg3) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    	
     }
 }

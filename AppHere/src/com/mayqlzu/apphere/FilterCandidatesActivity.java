@@ -94,7 +94,7 @@ public class FilterCandidatesActivity extends Activity{
 			}
 			
 			Intent intent = new Intent();
-			intent.putExtra(CONST_STRING.selected_indice, cookedIndice);
+			intent.putExtra(CONST.selected_indice, cookedIndice);
 			m_activity.setResult(
 					// set result code with a same value of request code of caller
 					RequestCodes.COLLECT_CONTACTS_FROM_SMS_TO_FILTER_CANDIDATES.ordinal(),
@@ -113,9 +113,9 @@ public class FilterCandidatesActivity extends Activity{
         
         // receive param from caller
         Intent intent = this.getIntent();
-        m_address = intent.getStringArrayExtra(CONST_STRING.address);
-        m_body = intent.getStringArrayExtra(CONST_STRING.body);
-        m_date_sent = intent.getStringArrayExtra(CONST_STRING.date_sent);
+        m_address = intent.getStringArrayExtra(CONST.address);
+        m_body = intent.getStringArrayExtra(CONST.body);
+        m_date_sent = intent.getStringArrayExtra(CONST.date_sent);
         
         // convert 3 array to one
         // attention: keep consistency with the comparison algorithm between array and list

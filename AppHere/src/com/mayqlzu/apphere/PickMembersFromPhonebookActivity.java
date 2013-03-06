@@ -83,8 +83,8 @@ public class PickMembersFromPhonebookActivity extends Activity{
 			String[] selNumbersArr = Contact.ArrayList2Array(selNumbers);
 			
 			Intent intent = new Intent();
-			intent.putExtra(CONST_STRING.names, selNamesArr);
-			intent.putExtra(CONST_STRING.numbers, selNumbersArr);
+			intent.putExtra(CONST.names, selNamesArr);
+			intent.putExtra(CONST.numbers, selNumbersArr);
 			m_activity.setResult(
 					// set result code with a same value of request code of caller
 					RequestCodes.MEMBERS_FRAGMENT_TO_PICK_MEMBERS_FROM_PHONEBOOK.ordinal(),
