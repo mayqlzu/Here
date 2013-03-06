@@ -44,14 +44,20 @@ public class MembersFragment extends Fragment {
         			System.out.println("button addOneByHand clicked");
         			// Perform action on click
         			View fragmentViewInOuterClass = MembersFragment.this.m_thisFragmentView;
-        			String name = ((EditText)(fragmentViewInOuterClass.findViewById(R.id.text_name))).getText().toString();
-        			String number = ((EditText)(fragmentViewInOuterClass.findViewById(R.id.text_number))).getText().toString();
+        			EditText textName = (EditText)(fragmentViewInOuterClass.findViewById(R.id.text_name));
+        			String name = textName.getText().toString();
+        			EditText textNumber = (EditText)(fragmentViewInOuterClass.findViewById(R.id.text_number));
+        			String number = textNumber.getText().toString();
         			
         			/* 
         			 * insert new record to database
         			 * deem jeff 123 and jeff 124 as two persons with same name but different numbers
         			 */
         			MembersFragment.this.m_db.addOneMember(name, number);
+        			
+        			// clear input
+        			textName.setText(null);
+        			textNumber.setText(null);
      
         			// refresh UI
         			MembersFragment.this.refreshListView();
