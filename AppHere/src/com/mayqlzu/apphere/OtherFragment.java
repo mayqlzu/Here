@@ -16,7 +16,7 @@ public class OtherFragment extends Fragment {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
     		new AlertDialog.Builder(v.getContext()) 
-            				.setMessage("thanks for you reply :)")  
+            				.setMessage("thanks for your reply :)")  
             				.setPositiveButton("OK", null)  
             				.show(); 
 		}
