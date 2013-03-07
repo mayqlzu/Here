@@ -1,6 +1,7 @@
 package com.mayqlzu.apphere;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -74,13 +76,37 @@ public class CollectContactsFromSMSActivity extends Activity{
 				
 				// read inbox
 				// todo: do it in another thread to avoid UI freeze
+				
+				// prepare date range
+				Date start_of_today = new Date(); //current time
+				start_of_today.setHours(0);
+				start_of_today.setMinutes(0);
+				start_of_today.setSeconds(0);
+				
+				long million_seconds_one_day = 24*60*60*1000;
+				Date start_of_yesterday = new Date(start_of_today.getTime() - million_seconds_one_day);
+				
+				// set selection condition
+				SeekBar seekBar = (SeekBar)hostActivity.findViewById(R.id.seekBar);
+				int progress = seekBar.getProgress();
+				String selection = "";
+				if(0 == progress){
+					selection = "date_sent > " + start_of_today.getTime();
+				}else if(1 == progress){
+					selection = "date_sent > " + start_of_yesterday.getTime();
+				}else{
+					selection = "";
+				}
+				
+				//Log.d("filter SMS", selection);
+				
 				Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), 
-						null, null, null, null);
-				cursor.moveToFirst();
-				// hint user if inbox is empty
+						null, selection, null, null);
+				
+				// hint user if no valid sms found
 				if(false == cursor.moveToFirst()){
 	    			new AlertDialog.Builder(hostActivity)    
-	                .setMessage("inbox is empty")  
+	                .setMessage("no SMS found")  
 	                .setPositiveButton("OK", null)  
 	                .show();
 					return;
