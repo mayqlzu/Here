@@ -3,6 +3,7 @@ package com.mayqlzu.apphere;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -139,6 +140,14 @@ public class PickMembersFromPhonebookActivity extends Activity{
         btn_chooseAll.setOnClickListener(listener);
         btn_markedOnly.setOnClickListener(listener);
         btn_cancel.setOnClickListener(listener);
+        
+        // hint if no contact
+        if(0 == contacts.size()){
+    		new AlertDialog.Builder(this)    
+            .setMessage("No contacts")  
+            .setPositiveButton("OK", null)  
+            .show();
+        }
     }
 
     public ArrayList<Contact> readPhonebook(){
