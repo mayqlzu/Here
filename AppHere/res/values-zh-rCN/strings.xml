@@ -1,0 +1,45 @@
+<resources>
+
+    <string name="app_name">短信点名</string>
+    <string name="hello_world">你好世界！</string>
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_main">短信点名</string>
+    <string name="members">组员</string>
+    <string name="broadcast">广播</string>
+    <string name="call_the_roll">点名</string>
+    <string name="other">关于</string>
+    <string name="delete_all">删除全部</string>
+    <string name="delete_selected">删除选中</string>
+    <string name="name">名字</string>
+    <string name="number">号码</string>
+    <string name="add_one_by_hand">添加一个</string>
+    <string name="find_contacts_from_sms">从短信</string>
+    <string name="add_members_from_phonebook">从电话薄</string>
+    <string name="place_holder">占位</string>
+    
+    <string name="title_activity_collectContactsFromSMS">从短信搜索联系人</string>
+    <string name="hint">让你的组员给你发短信，只包含名字，比如：“周杰伦”</string>
+    <string name="range">占位</string>
+    <string name="start">开始</string>
+    <string name="cancel">取消</string>
+    
+    <string name="title_activity_filter_candidates">过滤联系人</string>
+    <string name="candidates_hint">候选：</string>
+    <string name="save_into_phonebook">顺便保存到电话薄</string>
+    <string name="choose_all">全选</string>
+    <string name="choose_marked_only">选择打勾的</string>
+    
+    <string name="title_activity_pick_members_from_phonebook">联系人</string>
+    
+    <string name="message">消息</string>
+    
+    <string name="call_the_roll_usage">点击开始按钮，然后让组员给你发短信： \"here\"</string>
+    <string name="status"> x 到了，还剩 n 人</string>
+    <string name="hurry_up">给未到者的消息</string>
+    <string name="stop">停止</string>
+    
+    <string name="author">mayqlzu@gmail.com</string>
+    <string name="like">顶</string>
+    <string name="dislike">踩</string>
+    <string name="exit">退出</string>
+</resources>
