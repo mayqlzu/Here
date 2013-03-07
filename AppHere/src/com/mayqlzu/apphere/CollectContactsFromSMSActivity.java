@@ -10,17 +10,50 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class CollectContactsFromSMSActivity extends Activity{
 	private String[] m_address;
 	private String[] m_body;
 	private String[] m_date_sent;
 	
+	private String[] m_rangeHint = new String[]{ "today's SMS", "today and yesterday's SMS", "All SMS"};
+	
+	private class MySeekBarListener implements SeekBar.OnSeekBarChangeListener{
+		private TextView m_range;
+		MySeekBarListener(TextView v){
+			m_range = v;
+		}
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+			// TODO Auto-generated method stub
+			m_range.setText(m_rangeHint[progress]);
+		}
+		@Override
+		public void onStartTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void onStopTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.collect_contacts_from_sms_layout);
+        
+        // register callback for seekBar
+        SeekBar seekBar = (SeekBar)this.findViewById(R.id.seekBar);
+        TextView range = (TextView)this.findViewById(R.id.range);
+        range.setText(m_rangeHint[2]);
+        seekBar.setOnSeekBarChangeListener(new MySeekBarListener(range));
+        
         
         // register callback for button "cancel"
         Button btn_cancel = (Button)this.findViewById(R.id.btn_cancel);
