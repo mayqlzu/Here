@@ -20,7 +20,7 @@ public class CollectContactsFromSMSActivity extends Activity{
 	private String[] m_body;
 	private String[] m_date_sent;
 	
-	private String[] m_rangeHint = new String[]{ "today's SMS", "today and yesterday's SMS", "All SMS"};
+	private String[] m_rangeHint;
 	
 	private class MySeekBarListener implements SeekBar.OnSeekBarChangeListener{
 		private TextView m_range;
@@ -49,6 +49,10 @@ public class CollectContactsFromSMSActivity extends Activity{
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.collect_contacts_from_sms_layout);
+        
+        m_rangeHint = new String[]{this.getString(R.string.todays),
+        		this.getString(R.string.today_and_yesterdays),
+        		this.getString(R.string.allSMS)};
         
         // register callback for seekBar
         SeekBar seekBar = (SeekBar)this.findViewById(R.id.seekBar);
@@ -106,8 +110,8 @@ public class CollectContactsFromSMSActivity extends Activity{
 				// hint user if no valid sms found
 				if(false == cursor.moveToFirst()){
 	    			new AlertDialog.Builder(hostActivity)    
-	                .setMessage("no SMS found")  
-	                .setPositiveButton("OK", null)  
+	                .setMessage(hostActivity.getString(R.string.no_contacts_found))  
+	                .setPositiveButton(hostActivity.getString(R.string.ok), null)  
 	                .show();
 					return;
 				}

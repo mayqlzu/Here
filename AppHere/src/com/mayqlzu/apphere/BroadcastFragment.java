@@ -118,8 +118,8 @@ public class BroadcastFragment extends Fragment {
     		
     		// hint
     		new AlertDialog.Builder(hostActivity)    
-    		                .setMessage("done :)")  
-    		                .setPositiveButton("OK", null)  
+    		                .setMessage(hostActivity.getString(R.string.sent))  
+    		                .setPositiveButton(hostActivity.getString(R.string.ok), null)  
     		                .show(); 
 		}
     }

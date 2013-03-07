@@ -144,8 +144,8 @@ public class PickMembersFromPhonebookActivity extends Activity{
         // hint if no contact
         if(0 == contacts.size()){
     		new AlertDialog.Builder(this)    
-            .setMessage("No contacts")  
-            .setPositiveButton("OK", null)  
+            .setMessage(this.getString(R.string.no_contacts_found))  
+            .setPositiveButton(this.getString(R.string.ok), null)  
             .show();
         }
     }

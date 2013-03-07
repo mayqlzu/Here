@@ -18,7 +18,7 @@
     <string name="place_holder">占位</string>
     
     <string name="title_activity_collectContactsFromSMS">从短信搜索联系人</string>
-    <string name="hint">让你的组员给你发短信，只包含名字，比如：“周杰伦”</string>
+    <string name="hint">让你的组员给你发短信，只包含名字，比如：“周杰伦”，然后开始搜索</string>
     <string name="range">占位</string>
     <string name="start">开始</string>
     <string name="cancel">取消</string>
@@ -42,4 +42,16 @@
     <string name="like">顶</string>
     <string name="dislike">踩</string>
     <string name="exit">退出</string>
+    
+    <string name="todays">今天的短信</string>
+    <string name="today_and_yesterdays">今天和昨天的短信</string>
+    <string name="allSMS">所有短信</string>
+    
+    <string name="no_contacts_found">没找到联系人</string>
+    <string name="sent">发送成功</string>
+    <string name="thanks_for_your_reply">谢谢你的反馈</string>
+    <string name="ok">好</string>
+    
+    <string name="arrived">到了</string>
+    <string name="left">未到</string>
 </resources>

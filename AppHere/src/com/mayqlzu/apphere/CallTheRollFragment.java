@@ -180,8 +180,8 @@ public class CallTheRollFragment extends Fragment {
 				
 				// hint
     			new AlertDialog.Builder(m_hostActivity)    
-    		                .setMessage("sent :)")  
-    		                .setPositiveButton("OK", null)  
+    		                .setMessage(m_hostActivity.getString(R.string.sent))  
+    		                .setPositiveButton(m_hostActivity.getString(R.string.ok), null)  
     		                .show();
 	            break;
             
@@ -247,8 +247,8 @@ public class CallTheRollFragment extends Fragment {
 	}
 	
 	private void updateStatusInfoText(String who){
-		String newStatus = who + " " + CONST.ARRIVED + ", " 
-					+ m_abcent.size() + " " + CONST.LEFT;
+		String newStatus = who + " " + this.getString(R.string.arrived) + ", " 
+					+ m_abcent.size() + " " + this.getString(R.string.left);
 		TextView textView = (TextView)(this.getActivity().findViewById(R.id.status));
 		textView.setText(newStatus);
 	}

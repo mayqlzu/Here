@@ -60,7 +60,9 @@ public final class R {
     public static final class string {
         public static final int add_members_from_phonebook=0x7f04000e;
         public static final int add_one_by_hand=0x7f04000c;
+        public static final int allSMS=0x7f040026;
         public static final int app_name=0x7f040000;
+        public static final int arrived=0x7f04002b;
         public static final int author=0x7f040020;
         public static final int broadcast=0x7f040005;
         public static final int call_the_roll=0x7f040006;
@@ -77,23 +79,30 @@ public final class R {
         public static final int hello_world=0x7f040001;
         public static final int hint=0x7f040011;
         public static final int hurry_up=0x7f04001e;
+        public static final int left=0x7f04002c;
         public static final int like=0x7f040021;
         public static final int members=0x7f040004;
         public static final int menu_settings=0x7f040002;
         public static final int message=0x7f04001b;
         public static final int name=0x7f04000a;
+        public static final int no_contacts_found=0x7f040027;
         public static final int number=0x7f04000b;
+        public static final int ok=0x7f04002a;
         public static final int other=0x7f040007;
         public static final int place_holder=0x7f04000f;
         public static final int range=0x7f040012;
         public static final int save_into_phonebook=0x7f040017;
+        public static final int sent=0x7f040028;
         public static final int start=0x7f040013;
         public static final int status=0x7f04001d;
         public static final int stop=0x7f04001f;
+        public static final int thanks_for_your_reply=0x7f040029;
         public static final int title_activity_collectContactsFromSMS=0x7f040010;
         public static final int title_activity_filter_candidates=0x7f040015;
         public static final int title_activity_main=0x7f040003;
         public static final int title_activity_pick_members_from_phonebook=0x7f04001a;
+        public static final int today_and_yesterdays=0x7f040025;
+        public static final int todays=0x7f040024;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
