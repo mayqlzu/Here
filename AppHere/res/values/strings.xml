@@ -18,7 +18,7 @@
     <string name="place_holder">PlaceHolder</string>
     
     <string name="title_activity_collectContactsFromSMS">Pick Members From SMS</string>
-    <string name="hint">let your friends send you SMS which contains their names alone, and start searching</string>
+    <string name="hint">Ask your members send you SMS which contains their names alone, ex: \"Mike\", and start searching</string>
     <string name="range">range msg place holder</string>
     <string name="start">Start</string>
     <string name="cancel">Cancel</string>
