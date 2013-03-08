@@ -1,16 +1,18 @@
 package com.mayqlzu.apphere;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -80,25 +82,32 @@ public class MembersFragment extends Fragment {
         thisFragmentView.findViewById(R.id.btn_delSelected).setOnClickListener(
             	new View.OnClickListener() {
             		public void onClick(View v) {
-            			// do nothing if no item checked
-            			if(0 == m_listView.getCheckedItemCount())
-            				return;
+            			ListView list = (ListView)MembersFragment.this.getActivity().findViewById(R.id.members_listview);
             			
             			// make sure id stable
             			if(false == m_adapter.hasStableIds())
             				System.out.println("adapter.hasStableIds() == false!");
             			
             			// get checked item ids
-            			long[] ids = m_listView.getCheckedItemIds();
-            			/*
-            			for(long id:ids){
-            				System.out.println("checked id: " + id);
+            			ArrayList<Long> ids = new ArrayList<Long>();
+            			for(int i=0; i<m_adapter.getCount(); i++){
+            				View item = list.getChildAt(i);
+            				CheckBox box = (CheckBox)item.findViewById(R.id.checkBox);
+            				long id  = m_adapter.getItemId(i); //this id is the same with the id in DB
+            				if(box.isChecked()){
+            					box.setChecked(false); // i have to clear mark manually
+            					ids.add(Long.valueOf(id));
+            				}
             			}
-            			*/
+            			
+            			long[] ids_arr = new long[ids.size()];
+            			for(int i=0; i<ids.size();i++){
+            				ids_arr[i] = ids.get(i);
+            			}
             			
             			// delete these records from DB by id
             			// todo: ok to use these ids as ids in DB ? so far so good
-            			MembersFragment.this.m_db.deleteMembers(ids);
+            			MembersFragment.this.m_db.deleteMembers(ids_arr);
             			
             			// refresh UI
             			MembersFragment.this.refreshListView();
@@ -164,9 +173,9 @@ public class MembersFragment extends Fragment {
     	
         ListView listView = (ListView)this.getActivity().findViewById(R.id.members_listview);
         m_adapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_multiple_choice, null,
+                R.layout.list_item_layout, null,
                 new String[] { Database.NAME },
-                new int[] { android.R.id.text1 }, 0); //you can use android.R.id.text2 if want to show more
+                new int[] { R.id.text }, 0); //you can use android.R.id.text2 if want to show more
         listView.setAdapter(m_adapter);
         /*
          *  add this line and user can set checkmark now, 
