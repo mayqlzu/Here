@@ -34,13 +34,13 @@ public class CallTheRollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-    	System.out.println("onCreateView");
+    	//System.out.println("onCreateView");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.calltheroll_fragment_layout, container, false);
     }
     
     public void onActivityCreated (Bundle savedInstanceState){
-        System.out.println("onActivityCreated");
+        //System.out.println("onActivityCreated");
         
     	super.onActivityCreated(savedInstanceState);
     	
@@ -63,6 +63,19 @@ public class CallTheRollFragment extends Fragment {
         
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemClickListener(new MyOnItemClickListener(this));
+        
+        /* 
+         * list not shown can "start/stop"button text is wrong when i switch to other tab and back
+         * so reset them here
+         */
+        if(this.m_isActive){
+        	this.refreshListUI();
+        	this.updateStatusInfoText("?"); // i know its' not perfect because 'who' is lost, solve it later
+        	btn_start_stop.setText(this.getActivity().getString(R.string.stop));
+        }else{
+        	btn_start_stop.setText(this.getActivity().getString(R.string.start));
+        }
+       	this.updateStatusInfoVisiblity();
         
     }
     
