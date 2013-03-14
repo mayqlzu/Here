@@ -43,6 +43,8 @@
     <string name="dislike">Dislike</string>
     <string name="exit">Exit</string>
     
+    <string name="call">Call</string>
+    
     
     <string name="todays">Today\'s SMS</string>
     <string name="today_and_yesterdays">Today and yesterday\'s SMS</string>

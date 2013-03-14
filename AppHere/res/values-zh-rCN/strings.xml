@@ -54,4 +54,6 @@
     
     <string name="arrived">到了</string>
     <string name="left">未到</string>
+    
+    <string name="call">给他电话</string>
 </resources>

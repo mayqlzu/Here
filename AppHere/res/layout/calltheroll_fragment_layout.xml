@@ -27,6 +27,15 @@
         android:layout_weight="1"
         android:layout_margin="10dip"
         />
+    
+   	<Button
+  		android:id="@+id/btn_call"
+       	android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:text="@string/call"
+       	android:layout_gravity="right"
+       	android:layout_marginRight="10dip"
+       	/>
 	
 	<RelativeLayout 
 	    android:layout_width="wrap_content"
