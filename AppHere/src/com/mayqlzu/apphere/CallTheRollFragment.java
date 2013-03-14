@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.Editable;
@@ -15,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +29,7 @@ public class CallTheRollFragment extends Fragment {
 	private boolean m_isActive = false; // inactive initially
 	private ArrayList<Contact> m_abcent = new ArrayList<Contact>();
 	private SMSReceiver m_receiver;
+	private Contact m_callee;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,14 +48,67 @@ public class CallTheRollFragment extends Fragment {
         Button btn_start_stop = (Button)hostActivity.findViewById(R.id.btn_start_stop);
         Button btn_broadcast = (Button)hostActivity.findViewById(R.id.btn_broadcast);
         EditText editText = (EditText)hostActivity.findViewById(R.id.broadcast_text);
+    	ListView listView = (ListView)hostActivity.findViewById(R.id.abcent_list);
+        Button btn_call = (Button)hostActivity.findViewById(R.id.btn_call);
         
         btn_broadcast.setEnabled(false);
         btn_broadcast.setOnClickListener(buttonListener);
         btn_start_stop.setOnClickListener(buttonListener);
+        btn_call.setOnClickListener(buttonListener);
         editText.addTextChangedListener(new MyTextWatcher(btn_broadcast));
         updateStatusInfoVisiblity();
         
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setOnItemClickListener(new MyOnItemClickListener(this));
+        
         m_receiver = new SMSReceiver(this);
+    }
+    
+    // return the Contact for convenience
+    private Contact rememberCallee(int index){
+    	return m_callee = m_abcent.get(index);
+    }
+    
+    private class MyOnItemClickListener implements OnItemClickListener{
+    	private CallTheRollFragment m_fragment;
+    	private ListView m_list;
+    	private Button m_btn_call;
+    	MyOnItemClickListener(CallTheRollFragment fragment){
+    		m_fragment = fragment;
+    		m_list = (ListView) m_fragment.getActivity().findViewById(R.id.abcent_list);
+    		m_btn_call = (Button) m_fragment.getActivity().findViewById(R.id.btn_call);
+    	}
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			String TAG = "CallTheRollFragment.MyOnItemClickListener.onItemClick()";
+			/*
+			 * for ArrayList, position == id
+			 */
+			Log.d(TAG, "item clicked, position="
+					+ position + " id=" + id);
+			/* 
+			 * you can NOT keep persistent focus for an list item, because
+			 * In touch mode, there is no focus and no selection,
+			 * read section "touch mode" in doc for detail
+			 * 
+			 * focused, selected and checked are different;
+			 * in touch mode, you can keep item checked if you called setChoiseMode() ahead, 
+			 * but you can NOT keep item focused or selected
+			 */
+			String call = view.getContext().getString(R.string.call);
+			Contact callee = m_fragment.rememberCallee(position);
+			String name = callee.m_name;
+			/* i can not keep item selected, so i ask the button to show the selected name
+			 * another solution is item.setBackgroundColor(A_DIFFERENT_COLOR), not used for now
+			 */
+			m_btn_call.setText(call + ": " + name);
+		}
+    }
+    
+    public Contact getContact(int index){
+    	return m_abcent.get(index);
     }
     
     private void sendSMS(String toNumber, String message){
@@ -184,9 +242,23 @@ public class CallTheRollFragment extends Fragment {
     		                .setPositiveButton(m_hostActivity.getString(R.string.ok), null)  
     		                .show();
 	            break;
+			case R.id.btn_call:
+				Contact callee = m_fragment.getCallee();
+				if(null == callee)
+					return;
+				String toNumber = callee.m_number;
+				Uri uri = Uri.parse("tel:" + toNumber);
+				Intent intent = new Intent(Intent.ACTION_CALL, uri);
+				startActivity(intent);
+
+				break;
             
 			}
 		}
+    }
+    
+    public Contact getCallee(){
+    	return m_callee;
     }
     
     private void refreshListUI(){
