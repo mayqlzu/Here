@@ -34,11 +34,14 @@ public class CallTheRollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+    	System.out.println("onCreateView");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.calltheroll_fragment_layout, container, false);
     }
     
     public void onActivityCreated (Bundle savedInstanceState){
+        System.out.println("onActivityCreated");
+        
     	super.onActivityCreated(savedInstanceState);
     	
         // register listener
@@ -61,7 +64,6 @@ public class CallTheRollFragment extends Fragment {
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemClickListener(new MyOnItemClickListener(this));
         
-        m_receiver = new SMSReceiver(this);
     }
     
     // return the Contact for convenience
@@ -204,12 +206,16 @@ public class CallTheRollFragment extends Fragment {
 	    		m_fragment.refreshListUI();
 	            
 	            if(m_fragment.m_isActive){
-	            	// i have to register broadcastReceiver to Activity, no choice
+	            	/* 1) you have to register broadcastReceiver to Activity, not to Fragment
+	            	 * 2) remember this receiver and you must unregister the same receiver later,
+	            	 * 		or you will get an exception
+	            	 */
+	            	m_fragment.m_receiver = new SMSReceiver(m_fragment);
 	            	m_hostActivity.registerReceiver(
 	            		m_fragment.m_receiver,
 	            		new IntentFilter(SMSReceiver.SMS_RECEIVED));
 	            }else{
-	            	m_hostActivity.unregisterReceiver(m_fragment.m_receiver);
+	            		m_hostActivity.unregisterReceiver(m_fragment.m_receiver);
 	            }
 	            
 	    		m_fragment.updateStatusInfoText("?");
